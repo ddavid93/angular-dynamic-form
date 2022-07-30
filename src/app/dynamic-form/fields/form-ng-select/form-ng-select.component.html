@@ -1,0 +1,49 @@
+<div *ngIf="!!group.get(config.name)" [className]="config.class" [formGroup]="group"
+     [hidden]="config.fieldType === 'hidden'" style="padding-top: 10px">
+    <div class="row">
+        <div [className]="!!ngSelect.plus ? 'col-lg-10' : 'col-lg-12'" id="ngSelect">
+            <app-label-form *ngIf="!!config.label" [config]="config"></app-label-form>
+            <ng-select #selectItem (change)="ngSelect.onChange?.emit(selectItem.selectedValues)"
+                       (scrollToEnd)="onScroll(selectItem.searchTerm)"
+                       (search)="onSearch()"
+                       [bindLabel]="config.ngSelect.bindLabel || 'name'"
+                       [bindValue]="config.ngSelect.bindValue === null ? null : config.ngSelect.bindValue || 'id'"
+                       [class.is-invalid]="formService.isControlInvalid(group,config.name)"
+                       [class.is-valid]="formService.isControlValid(group,config.name)"
+                       [clearable]="!config.options?.notClearable"
+                       [formControlName]="config.name"
+                       [groupBy]="config.ngSelect.groupBy"
+                       [items]="ngSelect.items"
+                       [loading]="loading$ | async" [maxSelectedItems]="config.options?.maxSelectedItems || maxNumber"
+                       [multiple]="!!config.ngSelect.multiple" [placeholder]="config.placeholder || ''"
+                       [readonly]="ngSelect.readonly"
+                       [searchable]="!ngSelect.notSearchable"
+                       [typeahead]="input$" [virtualScroll]="ngSelect.dynamic || false" appendTo="body">
+                <ng-template [ngIf]="config.options?.color">
+                    <ng-template let-item="item" ng-label-tmp>
+                        <div [ngStyle]="{'background':item}" class="circle-div"></div>
+                    </ng-template>
+                </ng-template>
+                <ng-template let-item="item" ng-option-tmp>
+                    <div *ngIf="config.options?.color" [ngStyle]="{'background':item}" class="circle-div"></div>
+                    <div *ngIf="!config.options?.color" [ngStyle]="{'color': item[config.ngSelect.bindColor || 'color']}"
+                          style="white-space: normal">{{item[config.ngSelect.bindLabel || 'name'] || item}}</div>
+                </ng-template>
+            </ng-select>
+            <div *ngIf="!(formService.isSubmitted$ | async) && formService.controlHasError(group, 'required',config.name)"
+                 class="invalid-feedback">
+                Este campo es requerido
+            </div>
+            <span *ngIf="!!config.helperText" [innerHTML]="config.helperText | translate" class="form-text text-muted">
+            </span>
+        </div>
+        <div *ngIf="!!ngSelect.plus" class="col-lg-2 plus" ngbPopover="Crear {{config.label}}"
+             triggers="mouseenter:mouseleave">
+            <div (click)="triggerModal()" class="cursor-pointer">
+                <app-svg class="svg-icon svg-icon-xl svg-icon-primary" name="plus"></app-svg>
+            </div>
+        </div>
+    </div>
+</div>
+
+

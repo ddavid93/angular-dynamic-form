@@ -1,0 +1,46 @@
+<ng-container *ngIf="!!isAllDay">
+    <div class="col-1">
+        <ng-container [formGroup]="group">
+            <ng-container [ngTemplateOutlet]="allDayTemplate"></ng-container>
+        </ng-container>
+    </div>
+</ng-container>
+
+<div *ngFor="let item of iteration;let i = index" [class]="item.class" [class.iterator]="true">
+    <app-label-form *ngIf="!!item.label" [config]="item"></app-label-form>
+    <ng-container *ngIf="!isTimeType(item)">
+        <ng-container [ngTemplateOutlet]="dateTemplate"
+            [ngTemplateOutletContext]="{cfg:item,endDate: item.options?.endDate}">
+        </ng-container>
+    </ng-container>
+    <ng-container *ngIf="isTimeType(item)" [ngTemplateOutletContext]="{cfg:item}" [ngTemplateOutlet]="timeTemplate">
+    </ng-container>
+    <span *ngIf="!!item.helperText" [innerHTML]="item.helperText | translate" class="form-text text-muted"></span>
+</div>
+
+<ng-template [formGroup]="group" #allDayTemplate>
+    <div class="all-day-padding-top">
+        <div class="input-group-prepend" ngbPopover="Todo el día" placement="top" triggers="mouseenter:mouseleave">
+            <span class="input-group-text" style="background: #1bc5bd42;">
+                <label class="checkbox checkbox-inline checkbox-success">
+                    <input formControlName="is_full_day_event" name="is_full_day_event" type="checkbox" />
+                    <span style="background-color: #1bc5bd94;"></span>
+                </label>
+            </span>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #dateTemplate [formGroup]="group" let-endDate="endDate" let-cfg="cfg">
+    <input [class.is-invalid]="formService.isControlInvalid(group,cfg.name)" [formControlName]="cfg.name"
+        [id]="cfg.name" [minDate]="cfg.options?.min || undefined" [maxDate]="cfg.options?.max || undefined "
+        [bsConfig]="!!endDate ? dateEndConfig :dateConfig" autocomplete="off" bsDatepicker class="form-control" />
+</ng-template>
+
+<ng-template let-cfg="cfg" #timeTemplate>
+    <div [class.time-padding-top]="!!config.label">
+        <dynamic-form [form]="group" [config]="[cfg]" [saveButton]="false" [tempOnlyThisField]="true" [onlyFields]="true"
+            [canGoBack]="false">
+        </dynamic-form>
+    </div>
+</ng-template>

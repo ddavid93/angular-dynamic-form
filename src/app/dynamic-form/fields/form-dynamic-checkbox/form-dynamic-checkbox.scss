@@ -1,0 +1,13 @@
+:host {
+  display: contents
+}
+
+.switch input:empty ~ span:after {
+  background-color: #F64E60;
+  color: #F64E60;
+}
+
+.switch input:checked ~ span:after {
+  color: #3699FF !important;
+  background-color: #3699FF !important;
+}

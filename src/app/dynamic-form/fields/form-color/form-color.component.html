@@ -1,0 +1,13 @@
+<div [formGroup]="group" class="col-lg-12 col-md-12" style="padding-top: 10px">
+    <app-label-form [config]="config"></app-label-form>
+    <div class="input-group" id="color">
+        <input [formControlName]="config.name" [id]="config.name" [ngxMatColorPicker]="picker"
+               [style]="config.style" class="form-control" readonly/>
+        <ngx-mat-color-toggle [for]="picker" matSuffix></ngx-mat-color-toggle>
+        <ngx-mat-color-picker #picker></ngx-mat-color-picker>
+    </div>
+</div>
+
+
+
+

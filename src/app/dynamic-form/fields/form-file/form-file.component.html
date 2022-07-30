@@ -1,0 +1,15 @@
+<div [className]="config.class" [formGroup]="group" style="padding-top: 10px">
+    <app-label-form *ngIf="config.label" [config]="config"></app-label-form>
+    <div class="file-input">
+        <input [accept]="config.options?.accept" type="file" id="file" (change)="change($event)" class="file" />
+        <input [formControlName]="config.name" type="hidden" />
+        <label for="file" [matTooltip]="fileDetails">
+            {{fileDetails || 'Seleccione un archivo'}}
+        </label>
+        <span (click)="clear()" *ngIf="fileDetails" matTooltip="Limpiar"
+            class="btn btn-xs btn-icon btn-circle btn-shadow delete">
+            <app-svg class="svg-icon svg-icon-md svg-icon-danger" name="delete"></app-svg>
+        </span>
+    </div>
+    <span *ngIf="config.options?.helperText" class="form-text text-muted"> {{config.options?.helperText}}</span>
+</div>

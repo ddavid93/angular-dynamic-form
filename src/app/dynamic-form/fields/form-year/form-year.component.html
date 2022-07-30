@@ -1,0 +1,19 @@
+<div *ngIf="!!group.get(config.name)" [className]="config.class" [formGroup]="group" style="padding-top: 10px">
+    <app-label-form *ngIf="!!config.label" [config]="config"></app-label-form>
+    <input (click)="dp.open()"
+           [class.is-invalid]="!!config.validation?.length ? formService.isControlInvalid(group,config.name): ''"
+           [class.is-valid]="!!config.validation?.length ? formService.isControlValid(group,config.name): ''"
+           [formControlName]="config.name" 
+           [id]="config.name"           
+           [matDatepicker]="dp"
+           [placeholder]="config.placeholder || ''"
+           class="form-control"/>
+    <mat-datepicker #dp
+                    (yearSelected)="chosenYearHandler($event, dp)"
+                    startView="multi-year">
+    </mat-datepicker>
+    <span *ngIf="!!config.helperText"
+        [innerHTML]="config.helperText | translate"
+        class="form-text text-muted">
+    </span>
+</div>

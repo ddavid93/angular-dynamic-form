@@ -1,0 +1,15 @@
+<div [className]="config.class" [formGroup]="group" style="padding-top: 10px">
+    <app-label-form [config]="config" style="padding-left: 30px;"></app-label-form>
+    <div class="padding-switch">
+        <span class="switch switch-icon">
+             <app-svg [class]="config.options?.firstSvgClass" [name]="config.options?.firstSvg"
+                      class="svg-icon svg-icon-lg"></app-svg>
+            <label>
+             <input [formControlName]="config.name" [id]="config.name" type="checkbox"/>
+             <span></span>
+            </label>
+           <app-svg [class]="config.options?.secondSvgClass" [name]="config.options?.secondSvg"
+                    class="svg-icon svg-icon-lg svg-icon-primary"></app-svg>
+       </span>
+    </div>
+</div>

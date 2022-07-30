@@ -1,0 +1,20 @@
+<div [className]="config.class" [formGroup]="group">
+    <div [class.image-input-empty]="!imageURL || !control.value"
+         [ngClass]="config.options?.class"
+         [style.backgroundImage]="'./assets/media/users/blank.png'" class="image-input image-input-outline image-input-circle">
+        <app-secure-image [defaultImg]="config.options.default" [defaultUrlPrefix]="!imageURL && !showedPreview"
+                          [urlImg]="!imageURL && !showedPreview ? control.value : imageURL"
+                          class="image-input-wrapper"></app-secure-image>
+        <label [matTooltip]="'Cambiar ' + config.label"
+               class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change">
+            <i class="fa fa-pen icon-sm text-muted"></i>
+            <input (change)="showPreview($event)" accept="image/*" name="profile_avatar" type="file"/>
+            <input [formControlName]="config.name" name="profile_remove" type="hidden"/>
+        </label>
+        <span (click)="clear()" *ngIf="imageURL || control.value"
+              [matTooltip]="'Eliminar ' + config.label"
+              class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow delete">
+                    <i class="ki ki-bold-close icon-xs text-muted"></i>
+    </span>
+    </div>
+</div>

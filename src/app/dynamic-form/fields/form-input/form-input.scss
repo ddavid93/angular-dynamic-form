@@ -1,0 +1,48 @@
+:host {
+  display: contents
+}
+
+.static-text-input {
+  padding: 8px 5px 9px;
+  position: absolute;
+  background: #f9f9f9;
+  border-top-left-radius: 0.42rem;
+  border-bottom-left-radius: 0.42rem;
+
+  border-top: 1px solid #E4E6EF;
+  border-left: 1px solid #E4E6EF;
+  border-bottom: 1px solid #E4E6EF;
+}
+
+.static-text-input.valid-style {
+  border-left: 1px solid #1BC5BD;
+  border-top: 1px solid #1BC5BD;
+  border-bottom: 1px solid #1BC5BD;
+}
+
+.static-text-input.invalid-style {
+  border-left: 1px solid #F64E60;
+  border-top: 1px solid #F64E60;
+  border-bottom: 1px solid #F64E60;
+}
+
+.eyesPassLogin {
+  position: absolute;
+  right: 10px;
+  top: 12px;
+  z-index: 9999;
+}
+
+input {
+  border-top-right-radius: 0.42rem !important;
+  border-bottom-right-radius: 0.42rem !important;
+}
+
+#inputDiv {
+  display: contents;
+}
+
+#inputDiv > control-error {
+  position: absolute !important;
+  top: 40px !important;
+}

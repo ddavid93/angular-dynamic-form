@@ -1,0 +1,10 @@
+<app-label-form *ngIf="!!config.label" [config]="config"></app-label-form>
+<input container="body" [outsideClick]="true" type="text" [popoverContext]="value" [ngModel]="value" [id]="config.name"
+    [popover]="timeTemplate" class="form-control" readonly
+    [ngStyle]="{'background-color': toggleEnable ? ' #f3f6f9' : 'white'}" [disabled]="toggleEnable">
+<ng-template #timeTemplate [formGroup]="group">
+    <timepicker minuteStep="5" [min]="min" [max]="max" [formControlName]="config.name" [showMeridian]="false">
+    </timepicker>
+</ng-template>
+<span *ngIf="!!config.helperText" [innerHTML]="config.helperText | translate" class="form-text text-muted">
+</span>

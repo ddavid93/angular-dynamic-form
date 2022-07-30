@@ -1,0 +1,24 @@
+<div *ngIf="!!group.get(config.name)"
+     [className]="config.class"
+     [formGroup]="group"
+     style="padding-top: 10px">
+    <app-label-form *ngIf="showLabel" [config]="config"
+                    [style]="!!config.checkbox?.firstLabel ? 'padding-left: 40px;': ''"></app-label-form>
+    <div class="padding-switch">
+        <span class="switch switch-icon">
+            <label *ngIf="!!config.checkbox || !!config.checkbox?.firstLabel"
+                   style="margin-right: 5px">{{config.checkbox.firstLabel}}</label>
+            <label>
+             <input [formControlName]="config.name" [id]="config.name" type="checkbox"/>
+             <span></span>
+            </label>
+            <label *ngIf="!!config.checkbox"
+                   style="margin-left: 5px">{{config.checkbox.lastLabel}}</label>
+       </span>
+        <span *ngIf="!!config.helperText"
+              [innerHTML]="config.helperText | translate"
+              class="form-text text-muted">
+            </span>
+    </div>
+</div>
+

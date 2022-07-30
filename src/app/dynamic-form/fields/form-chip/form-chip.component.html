@@ -1,0 +1,14 @@
+<div [className]="config.class" [formGroup]="group">
+    <mat-form-field [appearance]="'outline'" class="example-full-width">
+        <mat-label>{{config.label}}</mat-label>
+        <mat-chip-list #chipList [formControlName]="config.name">
+            <mat-chip (removed)="remove(item)" *ngFor="let item of group.get(config.name).value">
+                {{item}}
+                <button aria-label="Cerrar" class="close" data-dismiss="modal" matChipRemove type="button">
+                    <i aria-hidden="true" class="ki ki-close" style="color: black"></i>
+                </button>
+            </mat-chip>
+            <input (matChipInputTokenEnd)="add($event)" [matChipInputFor]="chipList" autocomplete="off" matInput>
+        </mat-chip-list>
+    </mat-form-field>
+</div>

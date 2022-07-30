@@ -1,0 +1,30 @@
+<div [className]="config.class" [formGroup]="group">
+    <app-label-form [config]="config"></app-label-form>
+    <div [hidden]="textarea">
+        <app-json-control [class.is-invalid]="formService.isControlInvalid(group,config.name)"
+                          [class.is-valid]="formService.isControlValid(group,config.name)"
+                          [formControlName]="config.name"
+                          [id]="config.name">
+            <ng-container [ngTemplateOutlet]="button"></ng-container>
+        </app-json-control>
+    </div>
+    <div [hidden]="!textarea">
+        <div class="divContainer">
+            <div class="buttonContainer">
+                <ng-container [ngTemplateOutlet]="button"></ng-container>
+            </div>
+            <textarea [class.is-invalid]="formService.isControlInvalid(group,config.name)"
+                      [class.is-valid]="formService.isControlValid(group,config.name)" [formControlName]="config.name"
+                      [id]="config.name"
+                      [rows]="config.options?.rows || 5"
+                      class="form-control"></textarea>
+        </div>
+    </div>
+    <ng-template #button>
+        <a (click)="textarea = !textarea" class="btn btn-icon btn-light btn-hover-primary btn-sm ml-1"
+           matTooltip="Cambiar a {{!!textarea ? 'json' : 'texto'}}">
+                                    <span [inlineSVG]="!!textarea ? json : text"
+                                          cacheSVG="true"
+                                          class="svg-icon svg-icon-md svg-icon-primary"> </span> </a>
+    </ng-template>
+</div>

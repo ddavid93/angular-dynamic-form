@@ -1,0 +1,19 @@
+<div [className]="config.class" [formGroup]="group" style="padding-top: 10px">
+    <div class="row col-12">
+        <label>Sexo</label>
+        <div class="checkbox-inline">
+            <label class="checkbox">
+                <input type="checkbox" name="female" formControlName="female"/>
+                <span></span>
+                <app-svg [name]="'female'" class="svg-icon svg-icon-lg svg-icon-danger"></app-svg>
+                Femenino
+            </label>
+            <label class="checkbox">
+                <input type="checkbox" name="male" formControlName="male"/>
+                <span></span>
+                <app-svg [name]="'male'" class="svg-icon svg-icon-lg svg-icon-primary"></app-svg>
+                Masculino
+            </label>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,34 @@
+<div  [hidden]="config.fieldType === 'hidden'" [className]="config.class" [formGroup]="group" style="padding-top: 10px">
+    <div *ngIf="config.fieldType !== 'hidden';else input">
+        <app-label-form *ngIf="showLabel" [config]="config"></app-label-form>
+        <div [class.input-group]="config.fieldType === 'password'" style="position: relative">
+            <div *ngIf="!!config.staticText"
+                 [class.invalid-style]="!!config.validation?.length ? formService.isControlInvalid(group,config.name): ''"
+                 [class.valid-style]="!!config.validation?.length ? formService.isControlValid(group,config.name): ''"
+                 class="static-text-input">{{config.staticText}}</div>
+            <ng-container [ngTemplateOutlet]="input"></ng-container>
+            <span *ngIf="!!config.helperText"
+                  [innerHTML]="config.helperText | translate"
+                  class="form-text text-muted">
+            </span>
+        </div>
+    </div>
+    <ng-template #input>
+        <div id="inputDiv">
+            <input [class.is-invalid]="!!config.validation?.length ? formService.isControlInvalid(group,config.name): '' "
+                   [class.pl-7]="!!config.staticText"
+                   [formControlName]="config.name"
+                   [id]="config.name" [min]="config.options?.min"
+                   [placeholder]="config.placeholder || ''"
+                   [style]="config.style"
+                   [type]="config.fieldType === 'password' ? type : config.fieldType || 'text'"
+                   class="form-control"/>
+            <span *ngIf="config.fieldType === 'password' && !!group.get(config.name).value" class="eyesPassLogin">
+                <i (click)="togglePassword()"
+                   [ngClass]="type === 'password' ? 'fas fa-eye': 'fas fa-eye-slash'"
+                   style="cursor: pointer">
+                </i>
+            </span>
+        </div>
+    </ng-template>
+</div>

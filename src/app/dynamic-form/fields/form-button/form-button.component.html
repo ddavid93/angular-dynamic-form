@@ -1,0 +1,7 @@
+<div [formGroup]="group" class="float-right">
+    <button [disabled]="isLoading"
+        [ngClass]="{'spinner spinner-white spinner-right disabled': isLoading }"
+        class="btn btn-primary font-weight-bold mr-2" type="submit">
+        {{ isLoading ? (label + '...') : label }}
+    </button>
+</div>

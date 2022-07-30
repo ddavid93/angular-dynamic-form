@@ -1,0 +1,14 @@
+<div *ngIf="!!group.get(config.name)" [className]="config.class"
+     [formGroup]="group" style="padding-top: 10px">
+    <app-label-form [config]="config"></app-label-form>
+    <div class="{{config.options.class}}">
+        <label *ngFor="let option of config.options.options" class="radio">
+            <input [formControlName]="config.name"
+                   [name]="config.name"
+                   [value]="option"
+                   type="radio"/>
+            <span></span>
+            {{option}}
+        </label>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+<div *ngIf="!!group.get(config.name)" [className]="config.class" [formGroup]="group" style="padding-top: 10px">
+    <div class="row">
+        <div class="col-lg-12" id="ngSelect">
+            <app-label-form *ngIf="!!config.label" [config]="config"></app-label-form>
+            <ng-select [class.is-invalid]="formService.isControlInvalid(group,config.name)"
+                       [class.is-valid]="formService.isControlValid(group,config.name)"
+                       [formControlName]="config.name"
+                       [items]="items"
+                       appendTo="body">
+                <ng-template let-item="item" ng-label-tmp>
+                    {{item | advice}}
+                </ng-template>
+                <ng-template let-item="item" ng-option-tmp>
+                    {{item | advice}}
+                </ng-template>
+            </ng-select>
+            <div *ngIf="!(formService.isSubmitted$ | async) && formService.controlHasError(group, 'required',config.name)"
+                 class="invalid-feedback">
+                Este campo es requerido
+            </div>
+        </div>
+    </div>
+</div>
+
+
